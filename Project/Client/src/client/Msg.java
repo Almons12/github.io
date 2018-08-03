@@ -11,7 +11,8 @@ public enum Msg {
 			"Вы подключились к чату! \n",
 			"Введите сообщение!",
 			"Пользователь: ",
-			"Введите ваше сообщение"),
+			"Введите ваше сообщение",
+			"Соединение с сервером потеряно"),
 	
 	UA("Повідомлення користувачів", 
 			"Список користувачів", 
@@ -23,7 +24,8 @@ public enum Msg {
 			"Ви підключились до чату! \n",
 			"Введіть повідомлення!",
 			"Користувач: ",
-			"Введіть ваше повідомлення");
+			"Введіть ваше повідомлення",
+			"З'єднання з сервером втраченно!");
 
 	private final String messages;
 	private final String clientList;
@@ -36,6 +38,7 @@ public enum Msg {
 	private final String enterMsg;
 	private final String client;
 	private final String message;
+	private final String connectDrop;
 	
 	private Msg(String messages,
 			String clientList,
@@ -47,7 +50,8 @@ public enum Msg {
 			String connectToChat,
 			String enterMsg,
 			String client,
-			String message) {
+			String message,
+			String connectDrop) {
 		
 		this.messages = messages;
 		this.clientList = clientList;
@@ -60,6 +64,7 @@ public enum Msg {
 		this.enterMsg = enterMsg;
 		this.client = client;
 		this.message = message;
+		this.connectDrop = connectDrop;
 	}
 
 	public String getMessages() {
@@ -104,6 +109,10 @@ public enum Msg {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public String getConnectDrop() {
+		return connectDrop;
 	}
 	
 	

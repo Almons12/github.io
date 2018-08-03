@@ -53,7 +53,6 @@ public class GuiClient extends JFrame {
 
 	public void go() {
 		setLocal();
-		
 		constraints = new GridBagConstraints();
 		incoming = new JTextArea(15, 40);
 		incoming.setLineWrap(true);
@@ -94,31 +93,22 @@ public class GuiClient extends JFrame {
 		setVisible(true);
 
 	}
-	
-	public void setView() {
-		
+
+	private void setView() {
 		messages.setText(local.getMessages());
-		
 		message.setText(local.getMessage());
 		clientList.setText(local.getClientList());
 		messgLogin.setText(local.getMessgLogin());
 		sendButton.setText(local.getSendButton());
 		loginButton.setText(local.getLoginButton());
-		
-		
-		
-		
 	}
-	
 
-	public void viewOne() {
-
+	private void viewOne() {
 		setSize(250, 170);
 		setLayout(new GridBagLayout());
 		int x, y;
 		constraints.weightx = 1.0;
 		constraints.weighty = 1.0;
-
 		constraints.gridheight = 1;
 		setInGrid(messgLogin, x = 0, y = 0);
 		setInGrid(comboBox, 1, 0);
@@ -128,8 +118,7 @@ public class GuiClient extends JFrame {
 		setInGrid(systemMsg, 0, 4);
 	}
 
-	public void viewTwo() {
-
+	private void viewTwo() {
 		setSize(740, 400);
 		remove(messgLogin);
 		remove(login);
@@ -140,10 +129,8 @@ public class GuiClient extends JFrame {
 
 		setLayout(new GridBagLayout());
 		int x, y;
-
 		constraints.weightx = 1;
 		constraints.weighty = 1;
-
 		constraints.gridheight = 1;
 		setInGrid(messages, x = 0, y = 0);
 		setInGrid(clientList, 1, 0);
@@ -162,7 +149,7 @@ public class GuiClient extends JFrame {
 		add(component, constraints);
 	}
 
-	public void setLocal() {
+	private void setLocal() {
 		local = Msg.UA;
 
 		String[] items = { "UA", "RU" };
@@ -176,16 +163,14 @@ public class GuiClient extends JFrame {
 		};
 		comboBox = new JComboBox(items);
 		comboBox.addActionListener(actionListener);
-
 	}
 
-	public void threadStart() {
+	private void threadStart() {
 		Thread readerThread = new Thread(new IncomingReader());
 		readerThread.start();
 	}
 
 	private void setUpNetworking() throws UnknownHostException, IOException {
-
 		sock = new Socket("127.0.0.1", 5000);
 		InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(streamReader);
@@ -198,7 +183,7 @@ public class GuiClient extends JFrame {
 		System.out.println(log);
 	}
 
-	public class SendButtonListener implements ActionListener {
+	private class SendButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -210,13 +195,12 @@ public class GuiClient extends JFrame {
 				writer.flush();
 				outgoing.setText("");
 				outgoing.requestFocus();
-
 			}
 		}
 
 	}
 
-	public class LoginButtonListener implements ActionListener {
+	private class LoginButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -232,7 +216,7 @@ public class GuiClient extends JFrame {
 					init(log);
 					threadStart();
 					welcom.setText(local.getClient() + client);
-					setTitle("Chat  " + client);
+					setTitle("Chat:  " + client);
 					incoming.append(local.getConnectToChat());
 				} catch (IOException e1) {
 					systemMsg.setText(local.getConnectfail());
@@ -248,7 +232,7 @@ public class GuiClient extends JFrame {
 		}
 	}
 
-	public class IncomingReader implements Runnable {
+	private class IncomingReader implements Runnable {
 
 		@Override
 		public void run() {
@@ -270,14 +254,13 @@ public class GuiClient extends JFrame {
 					}
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Соединение с сервером потеряно");
+				JOptionPane.showMessageDialog(null, local.getConnectDrop());
 				System.exit(0);
-				// systemMsg.setText(local.getConnectfail());
 			}
 		}
 	}
 
-	public void init(boolean b) throws MyException {
+	private void init(boolean b) throws MyException {
 
 		if (!b) {
 			throw new MyException("");
@@ -285,7 +268,7 @@ public class GuiClient extends JFrame {
 		viewTwo();
 	}
 
-	public String replaceList(String message) {
+	private String replaceList(String message) {
 
 		String str = message.replaceAll("[\\$\\[\\]]", "");
 		return str.replace(", ", "\n");
