@@ -53,6 +53,7 @@ public class GuiClient extends JFrame {
 
 	public void go() {
 		setLocal();
+		
 		constraints = new GridBagConstraints();
 		incoming = new JTextArea(15, 40);
 		incoming.setLineWrap(true);
@@ -62,12 +63,13 @@ public class GuiClient extends JFrame {
 		list.setLineWrap(true);
 		list.setWrapStyleWord(true);
 		list.setEditable(false);
-		messages = new JLabel(local.getMessages());
-		message = new JLabel(local.getMessage());
-		clientList = new JLabel(local.getClientList());
-		messgLogin = new JLabel(local.getMessgLogin());
-		sendButton = new JButton(local.getSendButton());
-		loginButton = new JButton(local.getLoginButton());
+		messages = new JLabel();
+		message = new JLabel();
+		clientList = new JLabel();
+		messgLogin = new JLabel();
+		sendButton = new JButton();
+		loginButton = new JButton();
+		setView();
 		qScroller = new JScrollPane(incoming);
 		qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -92,6 +94,22 @@ public class GuiClient extends JFrame {
 		setVisible(true);
 
 	}
+	
+	public void setView() {
+		
+		messages.setText(local.getMessages());
+		
+		message.setText(local.getMessage());
+		clientList.setText(local.getClientList());
+		messgLogin.setText(local.getMessgLogin());
+		sendButton.setText(local.getSendButton());
+		loginButton.setText(local.getLoginButton());
+		
+		
+		
+		
+	}
+	
 
 	public void viewOne() {
 
@@ -146,12 +164,14 @@ public class GuiClient extends JFrame {
 
 	public void setLocal() {
 		local = Msg.UA;
+
 		String[] items = { "UA", "RU" };
 
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String item = (String) comboBox.getSelectedItem();
 				local = Msg.valueOf(item);
+				setView();
 			}
 		};
 		comboBox = new JComboBox(items);
