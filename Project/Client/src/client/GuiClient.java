@@ -33,6 +33,7 @@ public class GuiClient extends JFrame {
 	private JPasswordField password;
 	private JButton loginButton;
 	private JButton sendButton;
+	private JButton registration;
 	private JLabel systemMsg;
 	private JLabel clientList;
 	private JLabel messages;
@@ -68,7 +69,7 @@ public class GuiClient extends JFrame {
 		messgLogin = new JLabel();
 		sendButton = new JButton();
 		loginButton = new JButton();
-		setView();
+		localUpdate();
 		qScroller = new JScrollPane(incoming);
 		qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -94,7 +95,7 @@ public class GuiClient extends JFrame {
 
 	}
 
-	private void setView() {
+	private void localUpdate() {
 		messages.setText(local.getMessages());
 		message.setText(local.getMessage());
 		clientList.setText(local.getClientList());
@@ -105,6 +106,7 @@ public class GuiClient extends JFrame {
 
 	private void viewOne() {
 		setSize(250, 170);
+		setLocationRelativeTo(null);
 		setLayout(new GridBagLayout());
 		int x, y;
 		constraints.weightx = 1.0;
@@ -120,6 +122,7 @@ public class GuiClient extends JFrame {
 
 	private void viewTwo() {
 		setSize(740, 400);
+		setLocationRelativeTo(null);
 		remove(messgLogin);
 		remove(login);
 		remove(password);
@@ -158,7 +161,7 @@ public class GuiClient extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String item = (String) comboBox.getSelectedItem();
 				local = Msg.valueOf(item);
-				setView();
+				localUpdate();
 			}
 		};
 		comboBox = new JComboBox(items);

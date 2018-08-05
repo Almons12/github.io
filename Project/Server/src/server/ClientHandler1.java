@@ -15,7 +15,7 @@ public class ClientHandler1 {
 	BufferedReader reader;
 	ArrayList<String> loginList = new ArrayList();
 	private String password;
-	FilePassword file = new FilePassword();
+	Security security = new Security();
 	private boolean log;
 
 	public class ClientHandler implements Runnable {
@@ -33,6 +33,7 @@ public class ClientHandler1 {
 				loginList.add(login1);
 				list(loginList);
 				tellEveryone("Користувач " + login1 + " увійшов в чат!");
+				System.out.println("got a connection");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -69,13 +70,12 @@ public class ClientHandler1 {
 				reader = new BufferedReader(isReader);
 				login = reader.readLine();
 				password = reader.readLine();
-				log = file.validation(login, password, loginList);
+				log = security.validation(login, password, loginList);
 				writer.println(log);
 				writer.flush();
 				if (log) {
 					Thread t = new Thread(new ClientHandler(clientSocket, login));
 					t.start();
-					System.out.println("got a connection");
 				}
 				log = false;
 			}
