@@ -10,13 +10,15 @@ import java.util.Iterator;
 
 public class ClientHandler1 {
 
-	ArrayList clientOutputStreams;
-	String login;
-	BufferedReader reader;
-	ArrayList<String> loginList = new ArrayList();
+	private ArrayList clientOutputStreams;
+	private String login;
+	private BufferedReader reader;
+	private ArrayList<String> loginList = new ArrayList();
 	private String password;
-	Security security = new Security();
+	private Security security = new Security();
 	private boolean log;
+	private boolean reg;
+	private boolean log1;
 
 	public class ClientHandler implements Runnable {
 
@@ -42,9 +44,7 @@ public class ClientHandler1 {
 		@Override
 		public void run() {
 			String message;
-
 			try {
-
 				while ((message = reader.readLine()) != null) {
 					tellEveryone(login1 + ": " + message);
 				}
@@ -70,9 +70,16 @@ public class ClientHandler1 {
 				reader = new BufferedReader(isReader);
 				login = reader.readLine();
 				password = reader.readLine();
-				log = security.validation(login, password, loginList);
-				writer.println(log);
-				writer.flush();
+				reg = Boolean.parseBoolean(reader.readLine());
+				if (reg) {
+					log = security.validation(login, password, loginList);
+					writer.println(log);
+					writer.flush();
+				} else {
+					log1 = security.registration(login, password);
+					writer.println(log1);
+					writer.flush();
+				}
 				if (log) {
 					Thread t = new Thread(new ClientHandler(clientSocket, login));
 					t.start();
@@ -95,7 +102,6 @@ public class ClientHandler1 {
 				ex.printStackTrace();
 			}
 		}
-
 	}
 
 	public void list(ArrayList<String> login) {

@@ -12,7 +12,10 @@ public enum Msg {
 			"Введите сообщение!",
 			"Пользователь: ",
 			"Введите ваше сообщение",
-			"Соединение с сервером потеряно"),
+			"Соединение с сервером потеряно",
+			"Зарегистрироваться",
+			"Пользователь зарегистрирован",
+			"Пользователь уже существует"),
 	
 	UA("Повідомлення користувачів", 
 			"Список користувачів", 
@@ -25,7 +28,10 @@ public enum Msg {
 			"Введіть повідомлення!",
 			"Користувач: ",
 			"Введіть ваше повідомлення",
-			"З'єднання з сервером втраченно!");
+			"З'єднання з сервером втраченно!",
+			"Зареєструватись",
+			"Користувача зареєстрованно",
+			"Користувач вже існує");
 
 	private final String messages;
 	private final String clientList;
@@ -39,6 +45,9 @@ public enum Msg {
 	private final String client;
 	private final String message;
 	private final String connectDrop;
+	private final String registration;
+	private final String regTr;
+	private final String regFl;
 	
 	private Msg(String messages,
 			String clientList,
@@ -51,7 +60,10 @@ public enum Msg {
 			String enterMsg,
 			String client,
 			String message,
-			String connectDrop) {
+			String connectDrop,
+			String registration,
+			String regTr,
+			String regFl) {
 		
 		this.messages = messages;
 		this.clientList = clientList;
@@ -65,6 +77,9 @@ public enum Msg {
 		this.client = client;
 		this.message = message;
 		this.connectDrop = connectDrop;
+		this.registration = registration;
+		this.regTr = regTr;
+		this.regFl = regFl;
 	}
 
 	public String getMessages() {
@@ -113,6 +128,18 @@ public enum Msg {
 
 	public String getConnectDrop() {
 		return connectDrop;
+	}
+
+	public String getRegistration() {
+		return registration;
+	}
+
+	public String getRegTr() {
+		return regTr;
+	}
+
+	public String getRegFl() {
+		return regFl;
 	}
 	
 	

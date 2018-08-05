@@ -12,13 +12,18 @@ import java.util.Map;
 public class Security {
 
 	private Map<String, String> personMap = new HashMap();
+	private static String fileName = "src/file.txt";
+	private static FileWriter fw;
+	private static BufferedWriter bw;
+	private static FileReader fr;
+	private static BufferedReader br;
 
 	public Security() {
-		String fileName = "src/file.txt";
-		FileWriter fw = null;
-		BufferedWriter bw = null;
-		FileReader fr = null;
-		BufferedReader br = null;
+		go();
+	}
+
+	public void go() {
+
 		try {
 			fr = new FileReader(fileName);
 			br = new BufferedReader(fr);
@@ -40,7 +45,6 @@ public class Security {
 
 		if (count == 0) {
 			for (Map.Entry<String, String> entry : personMap.entrySet()) {
-
 				if (entry.getKey().equals(login) && entry.getValue().equals(password)) {
 					return true;
 				}
@@ -49,4 +53,25 @@ public class Security {
 		return false;
 	}
 
+	public boolean registration(String login, String password) {
+
+		for (Map.Entry<String, String> entry : personMap.entrySet()) {
+			if (entry.getKey().equals(login)) {
+				return false;
+			}
+		}
+		try {
+			fw = new FileWriter(fileName);
+			bw = new BufferedWriter(fw);
+			for (Map.Entry<String, String> entry1 : personMap.entrySet()) {
+				bw.write(entry1.getKey() + "|" + entry1.getValue() + "\n");
+			}
+			bw.write(login + "|" + password + "\n");
+			bw.close();
+			go();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 }

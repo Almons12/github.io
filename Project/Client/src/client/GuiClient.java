@@ -51,6 +51,7 @@ public class GuiClient extends JFrame {
 	private GridBagConstraints constraints;
 	private JComboBox comboBox;
 	private String client;
+	private boolean reg;
 
 	public void go() {
 		setLocal();
@@ -69,6 +70,7 @@ public class GuiClient extends JFrame {
 		messgLogin = new JLabel();
 		sendButton = new JButton();
 		loginButton = new JButton();
+		registration = new JButton();
 		localUpdate();
 		qScroller = new JScrollPane(incoming);
 		qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -84,6 +86,7 @@ public class GuiClient extends JFrame {
 		systemMsg.setForeground(Color.RED);
 		sendButton.addActionListener(new SendButtonListener());
 		loginButton.addActionListener(new LoginButtonListener());
+		registration.addActionListener(new RegistrationButtonListener());
 
 		setResizable(false);
 		setTitle("Chat");
@@ -102,10 +105,11 @@ public class GuiClient extends JFrame {
 		messgLogin.setText(local.getMessgLogin());
 		sendButton.setText(local.getSendButton());
 		loginButton.setText(local.getLoginButton());
+		registration.setText(local.getRegistration());
 	}
 
 	private void viewOne() {
-		setSize(250, 170);
+		setSize(260, 170);
 		setLocationRelativeTo(null);
 		setLayout(new GridBagLayout());
 		int x, y;
@@ -117,7 +121,8 @@ public class GuiClient extends JFrame {
 		setInGrid(login, 0, 1);
 		setInGrid(password, 0, 2);
 		setInGrid(loginButton, 0, 3);
-		setInGrid(systemMsg, 0, 4);
+		setInGrid(registration, 0, 4);
+		setInGrid(systemMsg, 0, 5);
 	}
 
 	private void viewTwo() {
@@ -129,6 +134,7 @@ public class GuiClient extends JFrame {
 		remove(loginButton);
 		remove(systemMsg);
 		remove(comboBox);
+		remove(registration);
 
 		setLayout(new GridBagLayout());
 		int x, y;
@@ -182,6 +188,8 @@ public class GuiClient extends JFrame {
 		writer.flush();
 		writer.println(password.getText());
 		writer.flush();
+		writer.println(reg);
+		writer.flush();
 		log = Boolean.parseBoolean(reader.readLine());
 		System.out.println(log);
 	}
@@ -203,6 +211,32 @@ public class GuiClient extends JFrame {
 
 	}
 
+	private class RegistrationButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (login.getText().equals("") | password.getText().equals("")) {
+				systemMsg.setText(local.getLoginfail());
+			} else {
+				systemMsg.setText("");
+				try {
+					reg = false;
+					setUpNetworking();
+					if (log) {
+						systemMsg.setText(local.getRegTr());
+					} else {
+
+						systemMsg.setText(local.getRegFl());
+					}
+					sock.close();
+				} catch (IOException e1) {
+					systemMsg.setText(local.getConnectfail());
+				}
+			}
+		}
+
+	}
+
 	private class LoginButtonListener implements ActionListener {
 
 		@Override
@@ -211,6 +245,7 @@ public class GuiClient extends JFrame {
 				systemMsg.setText(local.getLoginfail());
 			} else {
 				try {
+					reg = true;
 					setUpNetworking();
 					systemMsg.setText("");
 					client = login.getText();
