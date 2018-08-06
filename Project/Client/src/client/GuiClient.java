@@ -26,6 +26,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class GuiClient extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JTextArea incoming;
 	private JTextArea list;
 	private JTextField outgoing;
@@ -39,7 +40,7 @@ public class GuiClient extends JFrame {
 	private JLabel messages;
 	private JLabel message;
 	private JLabel messgLogin;
-	private JLabel welcom;
+	private JLabel welcome;
 	private JScrollPane qScroller;
 	private JScrollPane qScrollerList;
 	private BufferedReader reader;
@@ -82,20 +83,16 @@ public class GuiClient extends JFrame {
 		login = new JTextField(11);
 		password = new JPasswordField(11);
 		systemMsg = new JLabel();
-		welcom = new JLabel();
+		welcome = new JLabel();
 		systemMsg.setForeground(Color.RED);
 		sendButton.addActionListener(new SendButtonListener());
 		loginButton.addActionListener(new LoginButtonListener());
 		registration.addActionListener(new RegistrationButtonListener());
-
 		setResizable(false);
 		setTitle("Chat");
-
 		viewOne();
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-
 	}
 
 	private void localUpdate() {
@@ -147,7 +144,7 @@ public class GuiClient extends JFrame {
 		setInGrid(qScrollerList, 1, 1);
 		setInGrid(message, 0, 2);
 		setInGrid(outgoing, 0, 3);
-		setInGrid(welcom, 1, 3);
+		setInGrid(welcome, 1, 3);
 		setInGrid(sendButton, 0, 4);
 		setInGrid(systemMsg, 0, 5);
 	}
@@ -160,9 +157,7 @@ public class GuiClient extends JFrame {
 
 	private void setLocal() {
 		local = Msg.UA;
-
-		String[] items = { "UA", "RU" };
-
+		String[] items = { "UA", "RU", "EN" };
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String item = (String) comboBox.getSelectedItem();
@@ -208,15 +203,14 @@ public class GuiClient extends JFrame {
 				outgoing.requestFocus();
 			}
 		}
-
 	}
 
 	private class RegistrationButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (login.getText().equals("") | password.getText().equals("")) {
-				systemMsg.setText(local.getLoginfail());
+			if ((login.getText().equals("")) | (password.getText().equals(""))) {
+				systemMsg.setText(local.getLoginEmpty());
 			} else {
 				systemMsg.setText("");
 				try {
@@ -225,7 +219,6 @@ public class GuiClient extends JFrame {
 					if (log) {
 						systemMsg.setText(local.getRegTr());
 					} else {
-
 						systemMsg.setText(local.getRegFl());
 					}
 					sock.close();
@@ -234,7 +227,6 @@ public class GuiClient extends JFrame {
 				}
 			}
 		}
-
 	}
 
 	private class LoginButtonListener implements ActionListener {
@@ -242,7 +234,7 @@ public class GuiClient extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (login.getText().equals("") | password.getText().equals("")) {
-				systemMsg.setText(local.getLoginfail());
+				systemMsg.setText(local.getLoginEmpty());
 			} else {
 				try {
 					reg = true;
@@ -253,13 +245,13 @@ public class GuiClient extends JFrame {
 					password.setText("");
 					init(log);
 					threadStart();
-					welcom.setText(local.getClient() + client);
+					welcome.setText(local.getClient() + client);
 					setTitle("Chat:  " + client);
 					incoming.append(local.getConnectToChat());
 				} catch (IOException e1) {
 					systemMsg.setText(local.getConnectfail());
 				} catch (MyException e1) {
-					systemMsg.setText(local.getLoginfail());
+					systemMsg.setText(local.getLoginFail());
 					try {
 						sock.close();
 					} catch (IOException e2) {

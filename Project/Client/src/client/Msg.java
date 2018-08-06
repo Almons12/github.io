@@ -15,12 +15,13 @@ public enum Msg {
 			"Соединение с сервером потеряно",
 			"Зарегистрироваться",
 			"Пользователь зарегистрирован",
-			"Пользователь уже существует"),
+			"Пользователь уже существует",
+			"Неверный логин или пароль"),
 	
 	UA("Повідомлення користувачів", 
 			"Список користувачів", 
 			"Введіть ваш логін і пароль", 
-			"Введіть корректні данні!", 
+			"Введіть коректні дані!", 
 			"Сервер недоступний",
 			"Увійти",
 			"Надіслати",
@@ -28,15 +29,33 @@ public enum Msg {
 			"Введіть повідомлення!",
 			"Користувач: ",
 			"Введіть ваше повідомлення",
-			"З'єднання з сервером втраченно!",
+			"З'єднання з сервером втрачено!",
 			"Зареєструватись",
 			"Користувача зареєстрованно",
-			"Користувач вже існує");
+			"Користувач вже існує",
+			"Невірний логін або пароль"),
+	
+	EN("User messages", 
+			"User list", 
+			"Enter your login and password", 
+			"Enter the correct data!", 
+			"The server is not available",
+			"Sign in",
+			"Send",
+			"Connected to chat! \n",
+			"Enter a message!",
+			"User: ",
+			"Enter your message",
+			"Connection to the server lost!",
+			"Register",
+			"User is registered",
+			"User already exists",
+			"Invalid login or password");
 
 	private final String messages;
 	private final String clientList;
 	private final String messgLogin;
-	private final String loginfail;
+	private final String loginEmpty;
 	private final String connectfail;
 	private final String loginButton;
 	private final String sendButton;
@@ -48,11 +67,12 @@ public enum Msg {
 	private final String registration;
 	private final String regTr;
 	private final String regFl;
+	private final String loginFail;
 	
 	private Msg(String messages,
 			String clientList,
 			String messgLogin,
-			String loginfail,
+			String loginEmpty,
 			String connectfail,
 			String loginButton,
 			String sendButton,
@@ -63,12 +83,13 @@ public enum Msg {
 			String connectDrop,
 			String registration,
 			String regTr,
-			String regFl) {
+			String regFl,
+			String loginFail) {
 		
 		this.messages = messages;
 		this.clientList = clientList;
 		this.messgLogin = messgLogin;
-		this.loginfail = loginfail;
+		this.loginEmpty = loginEmpty;
 		this.connectfail = connectfail;
 		this.loginButton = loginButton;
 		this.sendButton = sendButton;
@@ -80,6 +101,7 @@ public enum Msg {
 		this.registration = registration;
 		this.regTr = regTr;
 		this.regFl = regFl;
+		this.loginFail = loginFail;
 	}
 
 	public String getMessages() {
@@ -94,8 +116,8 @@ public enum Msg {
 		return messgLogin;
 	}
 
-	public String getLoginfail() {
-		return loginfail;
+	public String getLoginEmpty() {
+		return loginEmpty;
 	}
 
 	public String getConnectfail() {
@@ -140,6 +162,10 @@ public enum Msg {
 
 	public String getRegFl() {
 		return regFl;
+	}
+
+	public String getLoginFail() {
+		return loginFail;
 	}
 	
 	
