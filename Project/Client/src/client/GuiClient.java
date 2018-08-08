@@ -24,6 +24,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import Exception.LoginFail;
+import Exception.LoginIsEmpty;
+
 public class GuiClient extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -48,7 +51,7 @@ public class GuiClient extends JFrame {
 	private Socket sock;
 	private boolean log;
 	private InputStreamReader streamReader;
-	private Msg local;
+	static Msg local;
 	private GridBagConstraints constraints;
 	private JComboBox comboBox;
 	private String client;
@@ -106,7 +109,7 @@ public class GuiClient extends JFrame {
 	}
 
 	private void viewOne() {
-		setSize(260, 170);
+		setSize(260, 180);
 		setLocationRelativeTo(null);
 		setLayout(new GridBagLayout());
 		int x, y;
@@ -209,22 +212,22 @@ public class GuiClient extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if ((login.getText().equals("")) | (password.getText().equals(""))) {
-				systemMsg.setText(local.getLoginEmpty());
-			} else {
+
+			try {
+				CheckLogin.loginIsEmpty(login.getText(), password.getText());
 				systemMsg.setText("");
-				try {
-					reg = false;
-					setUpNetworking();
-					if (log) {
-						systemMsg.setText(local.getRegTr());
-					} else {
-						systemMsg.setText(local.getRegFl());
-					}
-					sock.close();
-				} catch (IOException e1) {
-					systemMsg.setText(local.getConnectfail());
+				reg = false;
+				setUpNetworking();
+				if (log) {
+					systemMsg.setText(local.getRegTr());
+				} else {
+					systemMsg.setText(local.getRegFl());
 				}
+				sock.close();
+			} catch (IOException e1) {
+				systemMsg.setText(local.getConnectfail());
+			} catch (LoginIsEmpty e1) {
+				systemMsg.setText(e1.getMessage());
 			}
 		}
 	}
@@ -233,31 +236,32 @@ public class GuiClient extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (login.getText().equals("") | password.getText().equals("")) {
-				systemMsg.setText(local.getLoginEmpty());
-			} else {
+
+			try {
+				CheckLogin.loginIsEmpty(login.getText(), password.getText());
+				reg = true;
+				setUpNetworking();
+				systemMsg.setText("");
+				client = login.getText();
+				login.setText("");
+				password.setText("");
+				CheckLogin.init(log);
+				threadStart();
+				viewTwo();
+				welcome.setText(local.getClient() + client);
+				setTitle("Chat:  " + client);
+				incoming.append(local.getConnectToChat());
+			} catch (IOException e1) {
+				systemMsg.setText(local.getConnectfail());
+			} catch (LoginFail e1) {
+				systemMsg.setText(e1.getMessage());
 				try {
-					reg = true;
-					setUpNetworking();
-					systemMsg.setText("");
-					client = login.getText();
-					login.setText("");
-					password.setText("");
-					init(log);
-					threadStart();
-					welcome.setText(local.getClient() + client);
-					setTitle("Chat:  " + client);
-					incoming.append(local.getConnectToChat());
-				} catch (IOException e1) {
-					systemMsg.setText(local.getConnectfail());
-				} catch (MyException e1) {
-					systemMsg.setText(local.getLoginFail());
-					try {
-						sock.close();
-					} catch (IOException e2) {
-						e2.printStackTrace();
-					}
+					sock.close();
+				} catch (IOException e2) {
+					e2.printStackTrace();
 				}
+			} catch (LoginIsEmpty e1) {
+				systemMsg.setText(e1.getMessage());
 			}
 		}
 	}
@@ -288,14 +292,6 @@ public class GuiClient extends JFrame {
 				System.exit(0);
 			}
 		}
-	}
-
-	private void init(boolean b) throws MyException {
-
-		if (!b) {
-			throw new MyException("");
-		}
-		viewTwo();
 	}
 
 	private String replaceList(String message) {

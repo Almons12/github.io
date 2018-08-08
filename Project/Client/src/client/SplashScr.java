@@ -17,7 +17,7 @@ public class SplashScr {
 			g2.fillRect(0, bounds.height-20, bounds.width * i / 100, 20);
 			splash.update();
 			try {
-				Thread.sleep(20);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
