@@ -19,7 +19,7 @@ public class CheckLogin extends GuiClient {
 			throw new LoginIsEmpty(local.getLoginFail());
 		}
 
-		return false;
+		return true;
 
 	}
 
