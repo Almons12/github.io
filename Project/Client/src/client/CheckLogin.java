@@ -16,7 +16,7 @@ public class CheckLogin extends GuiClient {
 	public static boolean loginIsEmpty(String login, String password) throws LoginIsEmpty {
 
 		if (login.equals("") | password.equals("")) {
-			throw new LoginIsEmpty(local.getLoginFail());
+			throw new LoginIsEmpty(local.getLoginEmpty());
 		}
 
 		return true;
