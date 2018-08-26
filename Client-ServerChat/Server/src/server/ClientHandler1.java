@@ -15,7 +15,7 @@ public class ClientHandler1 {
 	private BufferedReader reader;
 	private ArrayList<String> loginList = new ArrayList();
 	private String password;
-	private Security security = new Security();
+	private SecurityNew security = new SecurityNew();
 	private boolean log;
 	private boolean reg;
 	private boolean log1;

@@ -1,6 +1,4 @@
-dfsgdfsd|sdfgdsf
 Almons|1995
-dgsdf|sfgsdf
 test||asdfasd
 test10|test10
 test122|test1
@@ -13,9 +11,4 @@ test3|test3
 test8|test8
 test9|test9
 test6|test6
-asdfads|adsfadfs
 test7|test7
-adsfasd|asdfasdf
-dasf|asdf
-qwe|qwe
-asdf|asdf
