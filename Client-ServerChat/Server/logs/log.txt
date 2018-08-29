@@ -1,0 +1,14 @@
+INFO - Client a into the chat!
+ERROR - Client a out the chat!
+INFO - Client a into the chat!
+INFO - Client a out the chat!
+INFO - Client test1 into the chat!
+INFO - Client test1 out the chat!
+INFO - Client a into the chat!2018-08-29T15:14:38.831
+INFO - Client a out the chat!2018-08-29T15:15:00.599
+INFO - Client a into the chat! 2018-08-29T16:49:39.566
+INFO - Client aa into the chat! 2018-08-29T16:50:15.353
+INFO - Client aa out the chat! 2018-08-29T16:50:56.212
+INFO - Client a out the chat! 2018-08-29T16:50:58.510
+INFO - Client a into the chat! 2018-08-29T16:55:10.994
+INFO - Client a out the chat! 2018-08-29T16:56:29.869
