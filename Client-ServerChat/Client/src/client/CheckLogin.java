@@ -13,6 +13,9 @@ public class CheckLogin extends GuiClient {
 		if (isAnswer == 2) {
 			throw new LoginFail(local.getUserIsOnline());
 		}
+		if (isAnswer == 6) {
+			throw new LoginFail(local.getUserIsBanned());
+		}
 
 	}
 

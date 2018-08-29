@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class SecurityNew {
@@ -14,7 +15,8 @@ public class SecurityNew {
 	private JDBCConnectionPool pool;
 	private Statement statement;
 	private Connection connection;
-	private ResultSet result1;
+	private ResultSet rs;
+	private ArrayList<Clients> list;
 
 	private final static String DRIVER = "com.mysql.jdbc.Driver";
 
@@ -31,33 +33,42 @@ public class SecurityNew {
 	}
 
 	public void readDB() throws SQLException {
-		result1 = statement.executeQuery("SELECT * FROM clients;");
-		while (result1.next()) {
-			clientMap.put(result1.getString("login"), result1.getString("password"));
+		list = new ArrayList<>();
+		list.clear();
+		rs = statement.executeQuery("SELECT * FROM clients;");
+		
+		while (rs.next()) {
+			// clientMap.put(result1.getString("login"), result1.getString("password"));
+			list.add(new Clients(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getByte(4)));
+
 		}
 	}
 
-	public byte validation(String login, String password, ArrayList<String> loginList) {
-
+	public byte validation(String login, String password, ArrayList<String> loginList) throws SQLException {
+		readDB();
 		long count = loginList.stream().filter(string -> string.equals(login)).count();
 
 		if (count == 0) {
-			for (Map.Entry<String, String> entry : clientMap.entrySet()) {
-				if (entry.getKey().equals(login) && entry.getValue().equals(password)) {
-					return 1;//client is
+			for (Clients client : list) {
+				if (client.getLogin().equals(login) && client.getPassword().equals(password)
+						&& client.getBanned() == 1) {
+					return 6;// client is banned
+				}
+				if (client.getLogin().equals(login) && client.getPassword().equals(password)) {
+					return 1;// client is
 				}
 			}
 		} else {
-			return 2;//client alredy is chat
+			return 2;// client alredy is chat
 		}
-		return 3;//client not is
+		return 3;// client not is
 	}
 
 	public byte registration(String login, String password) throws SQLException {
-
-		for (Map.Entry<String, String> entry : clientMap.entrySet()) {
-			if (entry.getKey().equals(login)) {
-				return 4;//client alredy reg
+		readDB();
+		for (Clients client : list) {
+			if (client.getLogin().equals(login)) {
+				return 4;// client alredy reg
 			}
 		}
 		statement.executeUpdate("INSERT INTO clients (login, password) VALUES ('" + login + "','" + password + "');");

@@ -17,7 +17,8 @@ public enum Msg {
 			"Пользователь зарегистрирован",
 			"Пользователь уже существует",
 			"Неверный логин или пароль",
-			"Пользователь уже в сети"),
+			"Пользователь уже в сети",
+			"Пользователь заблокирован"),
 	
 	UA("Повідомлення користувачів", 
 			"Список користувачів", 
@@ -35,7 +36,8 @@ public enum Msg {
 			"Користувача зареєстрованно",
 			"Користувач вже існує",
 			"Невірний логін або пароль",
-			"Користувач уже в мережі"),
+			"Користувач уже в мережі",
+			"Користувач заблокований"),
 	
 	EN("User messages", 
 			"User list", 
@@ -53,7 +55,8 @@ public enum Msg {
 			"User is registered",
 			"User already exists",
 			"Invalid login or password",
-			"User already is online");
+			"User already is online",
+			"User is banned");
 
 	private final String messages;
 	private final String clientList;
@@ -72,6 +75,7 @@ public enum Msg {
 	private final String regFl;
 	private final String loginFail;
 	private final String userIsOnline;
+	private final String userIsBanned;
 	
 	private Msg(String messages,
 			String clientList,
@@ -89,7 +93,8 @@ public enum Msg {
 			String regTr,
 			String regFl,
 			String loginFail,
-			String userIsOnline) {
+			String userIsOnline,
+			String userIsBanned) {
 		
 		this.messages = messages;
 		this.clientList = clientList;
@@ -108,6 +113,7 @@ public enum Msg {
 		this.regFl = regFl;
 		this.loginFail = loginFail;
 		this.userIsOnline = userIsOnline;
+		this.userIsBanned = userIsBanned;
 	}
 
 	public String getMessages() {
@@ -176,6 +182,10 @@ public enum Msg {
 
 	public String getUserIsOnline() {
 		return userIsOnline;
+	}
+
+	public String getUserIsBanned() {
+		return userIsBanned;
 	}
 	
 	
