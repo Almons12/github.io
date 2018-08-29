@@ -60,6 +60,7 @@ public class ClientHandler1 {
 			try {
 				while ((message = reader.readLine()) != null) {
 					tellEveryone(login1 + ": " + message);
+					security.insertMessage(login1, message);
 				}
 			} catch (Exception ex) {
 				loginList.remove(login1);

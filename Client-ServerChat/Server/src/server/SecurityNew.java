@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class SecurityNew {
@@ -36,9 +36,8 @@ public class SecurityNew {
 		list = new ArrayList<>();
 		list.clear();
 		rs = statement.executeQuery("SELECT * FROM clients;");
-		
+
 		while (rs.next()) {
-			// clientMap.put(result1.getString("login"), result1.getString("password"));
 			list.add(new Clients(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getByte(4)));
 
 		}
@@ -74,6 +73,13 @@ public class SecurityNew {
 		statement.executeUpdate("INSERT INTO clients (login, password) VALUES ('" + login + "','" + password + "');");
 		readDB();
 		return 5;// client reg
+	}
+
+	public void insertMessage(String login, String message) throws SQLException {
+
+		statement.executeUpdate("INSERT INTO Message (Clients, Message, Time) VALUES ('" + login + "','" + message
+				+ "','" + LocalDateTime.now() + "');");
+
 	}
 
 }

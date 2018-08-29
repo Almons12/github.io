@@ -58,3 +58,9 @@ INFO - Client test2 into the chat! 2018-08-29T21:58:57.959
 INFO - Client test2 out the chat! 2018-08-29T21:58:59.551
 INFO - Client a into the chat! 2018-08-29T21:59:42.264
 INFO - Client a out the chat! 2018-08-29T21:59:53.874
+INFO - Client test1 into the chat! 2018-08-29T22:13:58.779
+INFO - Client test1 out the chat! 2018-08-29T22:14:01.168
+INFO - Client aa into the chat! 2018-08-29T22:15:36.264
+INFO - Client test1 into the chat! 2018-08-29T22:15:51.735
+INFO - Client aa out the chat! 2018-08-29T22:18:00.438
+INFO - Client test1 out the chat! 2018-08-29T22:18:01.941
