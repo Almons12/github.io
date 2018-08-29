@@ -5,10 +5,13 @@ import Exception.LoginIsEmpty;
 
 public class CheckLogin extends GuiClient {
 
-	public static void init(boolean b) throws LoginFail {
+	public static void init(byte isAnswer) throws LoginFail {
 
-		if (!b) {
+		if (isAnswer == 3) {
 			throw new LoginFail(local.getLoginFail());
+		}
+		if (isAnswer == 2) {
+			throw new LoginFail(local.getUserIsOnline());
 		}
 
 	}

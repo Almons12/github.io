@@ -37,30 +37,32 @@ public class SecurityNew {
 		}
 	}
 
-	public boolean validation(String login, String password, ArrayList<String> loginList) {
+	public byte validation(String login, String password, ArrayList<String> loginList) {
 
 		long count = loginList.stream().filter(string -> string.equals(login)).count();
 
 		if (count == 0) {
 			for (Map.Entry<String, String> entry : clientMap.entrySet()) {
 				if (entry.getKey().equals(login) && entry.getValue().equals(password)) {
-					return true;
+					return 1;//client is
 				}
 			}
+		} else {
+			return 2;//client alredy is chat
 		}
-		return false;
+		return 3;//client not is
 	}
 
-	public boolean registration(String login, String password) throws SQLException {
+	public byte registration(String login, String password) throws SQLException {
 
 		for (Map.Entry<String, String> entry : clientMap.entrySet()) {
 			if (entry.getKey().equals(login)) {
-				return false;
+				return 4;//client alredy reg
 			}
 		}
 		statement.executeUpdate("INSERT INTO clients (login, password) VALUES ('" + login + "','" + password + "');");
 		readDB();
-		return true;
+		return 5;// client reg
 	}
 
 }

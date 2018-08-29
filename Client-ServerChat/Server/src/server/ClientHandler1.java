@@ -5,8 +5,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 public class ClientHandler1 {
 
@@ -16,9 +21,16 @@ public class ClientHandler1 {
 	private ArrayList<String> loginList = new ArrayList();
 	private String password;
 	private SecurityNew security = new SecurityNew();
-	private boolean log;
+	private byte log;
 	private boolean reg;
-	private boolean log1;
+	private byte log1;
+	private LocalDateTime currentTime;
+
+	
+	static {
+		new DOMConfigurator().doConfigure("src/log4j.xml", LogManager.getLoggerRepository());
+	}
+	static Logger logger = Logger.getLogger(ClientHandler1.class);
 
 	public class ClientHandler implements Runnable {
 
@@ -36,6 +48,7 @@ public class ClientHandler1 {
 				list(loginList);
 				tellEveryone("Користувач " + login1 + " увійшов в чат!");
 				System.out.println("got a connection");
+				logger.info("Client " + login1 + " into the chat! "+ LocalDateTime.now());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -52,6 +65,7 @@ public class ClientHandler1 {
 				loginList.remove(login1);
 				list(loginList);
 				tellEveryone("Користувач " + login1 + " вийшов з чату!");
+				logger.info("Client " + login1 + " out the chat! "+ LocalDateTime.now());
 			}
 		}
 	}
@@ -76,15 +90,15 @@ public class ClientHandler1 {
 					writer.println(log);
 					writer.flush();
 				} else {
-					log1 = security.registration(login, password);
-					writer.println(log1);
+					log = security.registration(login, password);
+					writer.println(log);
 					writer.flush();
 				}
-				if (log) {
+				if (log == 1) {
 					Thread t = new Thread(new ClientHandler(clientSocket, login));
 					t.start();
 				}
-				log = false;
+				log = 0;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

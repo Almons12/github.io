@@ -16,7 +16,8 @@ public enum Msg {
 			"Зарегистрироваться",
 			"Пользователь зарегистрирован",
 			"Пользователь уже существует",
-			"Неверный логин или пароль"),
+			"Неверный логин или пароль",
+			"Пользователь уже в сети"),
 	
 	UA("Повідомлення користувачів", 
 			"Список користувачів", 
@@ -33,7 +34,8 @@ public enum Msg {
 			"Зареєструватись",
 			"Користувача зареєстрованно",
 			"Користувач вже існує",
-			"Невірний логін або пароль"),
+			"Невірний логін або пароль",
+			"Користувач уже в мережі"),
 	
 	EN("User messages", 
 			"User list", 
@@ -50,7 +52,8 @@ public enum Msg {
 			"Register",
 			"User is registered",
 			"User already exists",
-			"Invalid login or password");
+			"Invalid login or password",
+			"User already is online");
 
 	private final String messages;
 	private final String clientList;
@@ -68,6 +71,7 @@ public enum Msg {
 	private final String regTr;
 	private final String regFl;
 	private final String loginFail;
+	private final String userIsOnline;
 	
 	private Msg(String messages,
 			String clientList,
@@ -84,7 +88,8 @@ public enum Msg {
 			String registration,
 			String regTr,
 			String regFl,
-			String loginFail) {
+			String loginFail,
+			String userIsOnline) {
 		
 		this.messages = messages;
 		this.clientList = clientList;
@@ -102,6 +107,7 @@ public enum Msg {
 		this.regTr = regTr;
 		this.regFl = regFl;
 		this.loginFail = loginFail;
+		this.userIsOnline = userIsOnline;
 	}
 
 	public String getMessages() {
@@ -166,6 +172,10 @@ public enum Msg {
 
 	public String getLoginFail() {
 		return loginFail;
+	}
+
+	public String getUserIsOnline() {
+		return userIsOnline;
 	}
 	
 	

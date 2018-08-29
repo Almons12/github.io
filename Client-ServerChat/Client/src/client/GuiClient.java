@@ -43,19 +43,20 @@ public class GuiClient extends JFrame {
 	private JLabel messages;
 	private JLabel message;
 	private JLabel messgLogin;
-	private JLabel welcome;
+	private JLabel clientName;
 	private JScrollPane qScroller;
 	private JScrollPane qScrollerList;
 	private BufferedReader reader;
 	private PrintWriter writer;
 	private Socket sock;
-	private boolean log;
+	private byte isAnswer;
 	private InputStreamReader streamReader;
 	static Msg local;
 	private GridBagConstraints constraints;
 	private JComboBox comboBox;
 	private String client;
-	private boolean reg;
+	private boolean loginOrRegister;
+	private Radio radio;
 
 	public void go() {
 		setLocal();
@@ -86,7 +87,7 @@ public class GuiClient extends JFrame {
 		login = new JTextField(11);
 		password = new JPasswordField(11);
 		systemMsg = new JLabel();
-		welcome = new JLabel();
+		clientName = new JLabel();
 		systemMsg.setForeground(Color.RED);
 		sendButton.addActionListener(new SendButtonListener());
 		loginButton.addActionListener(new LoginButtonListener());
@@ -135,7 +136,6 @@ public class GuiClient extends JFrame {
 		remove(systemMsg);
 		remove(comboBox);
 		remove(registration);
-
 		setLayout(new GridBagLayout());
 		int x, y;
 		constraints.weightx = 1;
@@ -147,7 +147,7 @@ public class GuiClient extends JFrame {
 		setInGrid(qScrollerList, 1, 1);
 		setInGrid(message, 0, 2);
 		setInGrid(outgoing, 0, 3);
-		setInGrid(welcome, 1, 3);
+		setInGrid(clientName, 1, 3);
 		setInGrid(sendButton, 0, 4);
 		setInGrid(systemMsg, 0, 5);
 	}
@@ -177,6 +177,11 @@ public class GuiClient extends JFrame {
 		readerThread.start();
 	}
 
+	private void threadRadio() {
+		Thread readerThread = new Thread(new Radio());
+		readerThread.start();
+	}
+
 	private void setUpNetworking() throws UnknownHostException, IOException {
 		sock = new Socket("127.0.0.1", 5000);
 		InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
@@ -186,10 +191,10 @@ public class GuiClient extends JFrame {
 		writer.flush();
 		writer.println(password.getText());
 		writer.flush();
-		writer.println(reg);
+		writer.println(loginOrRegister);
 		writer.flush();
-		log = Boolean.parseBoolean(reader.readLine());
-		System.out.println(log);
+		isAnswer = Byte.parseByte(reader.readLine());
+		System.out.println(isAnswer);
 	}
 
 	private class SendButtonListener implements ActionListener {
@@ -216,11 +221,12 @@ public class GuiClient extends JFrame {
 			try {
 				CheckLogin.loginIsEmpty(login.getText(), password.getText());
 				systemMsg.setText("");
-				reg = false;
+				loginOrRegister = false;
 				setUpNetworking();
-				if (log) {
+				if (isAnswer == 5) {
 					systemMsg.setText(local.getRegTr());
-				} else {
+				}
+				if (isAnswer == 4) {
 					systemMsg.setText(local.getRegFl());
 				}
 				sock.close();
@@ -239,16 +245,17 @@ public class GuiClient extends JFrame {
 
 			try {
 				CheckLogin.loginIsEmpty(login.getText(), password.getText());
-				reg = true;
+				loginOrRegister = true;
 				setUpNetworking();
 				systemMsg.setText("");
 				client = login.getText();
 				login.setText("");
 				password.setText("");
-				CheckLogin.init(log);
+				CheckLogin.init(isAnswer);
 				threadStart();
 				viewTwo();
-				welcome.setText(local.getClient() + client);
+				threadRadio();
+				clientName.setText(local.getClient() + client);
 				setTitle("Chat:  " + client);
 				incoming.append(local.getConnectToChat());
 			} catch (IOException e1) {
