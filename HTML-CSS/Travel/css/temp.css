@@ -1,0 +1,317 @@
+@font-face {
+  font-family: 'QuiteChocolatey';
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Quite Chocolatey.ttf") format("truetype"); }
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
+  color: #000;
+  background-color: gray; }
+
+p {
+  font-family: 'PT Serif', serif;
+  font-size: 20px;
+  line-height: 28px; }
+
+h1 {
+  font-family: 'QuiteChocolatey', serif;
+  font-size: 83.32px;
+  color: #d03958; }
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 90px;
+  line-height: 80px;
+  margin-bottom: 39px;
+  letter-spacing: -2px; }
+  h2 span {
+    color: #d03958; }
+
+h3 {
+  font-size: 50px;
+  letter-spacing: -2px; }
+
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff; }
+
+h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #d03958; }
+
+#wrapper_outer {
+  width: 100%;
+  margin: 0 auto; }
+
+#wrapper_inner {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 5px; }
+
+.wrapper {
+  display: grid;
+  background-color: white; }
+
+#header {
+  display: grid;
+  background: url(../img/header.png) no-repeat;
+  grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+  grid-template-rows: 150px 543px; }
+
+#logo {
+  margin: 9px 102px; }
+
+#menu {
+  margin: 59px 70px;
+  grid-column: 5/11; }
+
+#menu ul {
+  list-style: none; }
+
+#menu ul li {
+  display: inline;
+  margin-right: 25px; }
+
+#menu ul li a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #000; }
+
+#menu li a:hover,
+#menu li {
+  color: #fff; }
+
+#current {
+  color: #fff; }
+
+#hedtext {
+  margin: 28px 103px;
+  grid-column: 1/7;
+  grid-row-start: 2; }
+
+#hedtext p {
+  font-size: 19px; }
+
+#form {
+  width: 400px;
+  height: 520px;
+  margin: 103px 97px;
+  background: url(../img/maket2_0059_Rounded-Rectangle-2.png) no-repeat;
+  grid-column: 6/11;
+  grid-row-start: 2; }
+
+#form h4 {
+  padding: 4px 0;
+  text-align: center;
+  color: #fff; }
+
+#form input[type=text] {
+  font-family: 'PT Serif', serif;
+  font-size: 20px;
+  width: 353px;
+  height: 55px;
+  margin: 4px 0 13px 21px;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff; }
+
+#form input[type=checkbox] {
+  width: 19px;
+  height: 18px;
+  margin: -1px 0 0 18px;
+  border-radius: 10px;
+  background: url(../img/maket2_0047_Rounded-Rectangle-4.png) no-repeat; }
+
+#form p {
+  margin: 13px 0 0 10px;
+  color: #fff; }
+
+#form input[type=button] {
+  font-size: 22px;
+  width: 350px;
+  height: 55px;
+  margin: 19px 0 0 23px;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  background-color: #161616; }
+
+#cont1 {
+  height: 597px; }
+
+#cont1 h3 {
+  padding: 4px 98px; }
+  #cont1 h3 span {
+    color: #d03958; }
+
+.item2 {
+  display: grid;
+  margin: 100px 4px;
+  text-align: center;
+  grid-template-columns: 278px 282px 278px 263px;
+  grid-template-rows: 155px 47px; }
+  .item2 p {
+    margin: 39px 0 0 90px; }
+
+.heart {
+  background: url(../img/heart.png) no-repeat; }
+
+.tools {
+  background: url(../img/tools.png) no-repeat; }
+
+.lamp {
+  background: url(../img/lamp.png) no-repeat; }
+
+.navigation {
+  background: url(../img/navigation.png) no-repeat; }
+
+.heart,
+.tools,
+.lamp,
+.navigation {
+  width: 157px;
+  height: 153px;
+  margin: 0 104px;
+  background-position: center;
+  background-size: contain; }
+
+#item3 {
+  display: flex;
+  height: 123px;
+  background: url(../img/footer1.png) no-repeat; }
+  #item3 p {
+    padding: 10px 105px;
+    color: #fff; }
+
+#item3 input {
+  font-size: 20px;
+  font-weight: 500;
+  float: right;
+  width: 269px;
+  height: 64px;
+  margin: 33px 74px 0 -14px;
+  border: none;
+  border-radius: 5px;
+  background: url(../img/button.png) no-repeat; }
+
+#cont2 {
+  display: block;
+  width: 1200px;
+  height: 533px;
+  background: url(../img/cont2-bg.png) no-repeat; }
+
+.pracing {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px;
+  font-weight: bold;
+  padding: 25px 0;
+  text-align: center;
+  letter-spacing: -2px;
+  color: #000; }
+
+.price-pack {
+  display: flex;
+  margin-left: 20px;
+  justify-content: center; }
+
+.starter,
+.business,
+.profesional {
+  width: 318px;
+  height: 365px;
+  margin-right: 20px;
+  text-align: center;
+  background: url(../img/item-bg.png) no-repeat; }
+  .starter p,
+  .business p,
+  .profesional p {
+    margin: 31px; }
+
+.name-pack {
+  font-size: 22px; }
+
+.price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #d03958; }
+
+.button-starter {
+  background: url(../img/button-starter.png) no-repeat; }
+
+.button-business {
+  color: #fff;
+  background: url(../img/button-business.png) no-repeat; }
+
+.button-profesional {
+  background: url(../img/button-profesional.png) no-repeat; }
+
+.button-starter,
+.button-business,
+.button-profesional {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  width: 205px;
+  height: 49px;
+  border: none;
+  border-radius: 5px; }
+
+.cont3 {
+  display: flex; }
+  .cont3 img {
+    width: 134px;
+    height: 134px; }
+  .cont3 h3 {
+    text-align: center; }
+
+.testimonial {
+  padding: 119px 95px; }
+
+.block-one {
+  display: flex;
+  padding: 0 0; }
+
+.block-two {
+  display: flex;
+  padding: 0 0;
+  border-radius: 5px;
+  background: url(../img/block-two-img.png) no-repeat; }
+
+.gallery {
+  padding: 117px 20px; }
+  .gallery h3 {
+    color: #d03958; }
+  .gallery a {
+    font-size: 20px;
+    margin: 0 79px;
+    color: #d03958; }
+
+#footer {
+  display: grid;
+  width: 1200px;
+  height: 180px;
+  background: url(../img/footer.png) no-repeat;
+  grid-template-columns: 1fr 209px; }
+  #footer p {
+    padding: 41px 88px;
+    color: #fff; }
+    #footer p span {
+      color: #d03958; }
+  #footer h1 {
+    font-size: 64.36px;
+    font-weight: 400;
+    padding: 29px 0; }
+
+/*# sourceMappingURL=temp.css.map */
