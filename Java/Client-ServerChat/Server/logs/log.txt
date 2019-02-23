@@ -395,3 +395,10 @@ INFO - Client 11 into the chat! 2018-10-24T22:31:23.351
 INFO - Client 11 out the chat! 2018-10-24T22:31:27.355
 INFO - Client 11 into the chat! 2018-10-24T22:41:16.551
 INFO - Client 11 out the chat! 2018-10-24T22:41:26.957
+INFO - Client q register the chat! 2018-11-12T19:06:33.758
+INFO - Client q into the chat! 2018-11-12T19:06:35.894
+INFO - Client q out the chat! 2018-11-12T19:06:38.579
+INFO - Client q into the chat! 2018-11-12T19:07:01.623
+INFO - Client q out the chat! 2018-11-12T19:07:19.010
+INFO - Client q into the chat! 2018-11-12T19:42:11.055
+INFO - Client q out the chat! 2018-11-12T19:45:00.951

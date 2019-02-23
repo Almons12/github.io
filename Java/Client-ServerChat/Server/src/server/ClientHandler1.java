@@ -16,6 +16,7 @@ import org.apache.log4j.xml.DOMConfigurator;
 public class ClientHandler1 {
 
 	private ArrayList clientOutputStreams;
+	private Map clients;
 	private String login;
 	private BufferedReader reader;
 	private ArrayList<String> loginList = new ArrayList();
@@ -81,7 +82,7 @@ public class ClientHandler1 {
 				Socket clientSocket = serverSock.accept();
 				PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
 				clientOutputStreams.add(writer);
-
+				security.insertClient(writer);
 				InputStreamReader isReader = new InputStreamReader(clientSocket.getInputStream());
 				reader = new BufferedReader(isReader);
 				login = reader.readLine();
