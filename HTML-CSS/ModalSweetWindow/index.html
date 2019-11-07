@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+<!-- https://sweetalert.js.org/guides/ -->
+<!-- window on page -->
+	<button id="button">Click</button>
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+		var button = document.getElementById("button");
+		button.addEventListener('click', function(){
+			swal({
+  				title: "Good job!",
+  				text: "You clicked the button!",
+  				icon: "success",
+			});
+		});
+		
+	</script>
+
+
+</body>
+</html>
